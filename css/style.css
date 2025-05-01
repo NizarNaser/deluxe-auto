@@ -510,7 +510,10 @@ body {
   #WORK
 \*-----------------------------------*/
 
-.work .container { padding-inline: 0; }
+.work .container {
+   padding-inline: 0; 
+
+  }
 
 .work .section-title { margin-block-end: 24px; }
 
@@ -635,7 +638,11 @@ body {
 /**
  * responsive for large than 575px screen
  */
-
+ @media (min-width: 575px) and (max-width: 1200px) {
+ .has-scrollbar{
+  gap:5px
+ }
+ }
 @media (min-width: 575px) {
 
   /**
@@ -766,6 +773,8 @@ body {
     --fs-1: 4rem;
     --fs-2: 5rem;
     --fs-3: 3.4rem;
+
+
 
   }
 
