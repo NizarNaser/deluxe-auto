@@ -140,7 +140,7 @@ const Main = () => {
                             Entdecken Sie unsere große Auswahl an Fahrzeugen in unserem Ausstellungsraum. Wir bieten Ihnen Fahrzeuge in verschiedenen Modellen und Ausstattungen, die alle Ihre Bedürfnisse erfüllen.
                         </h3>
                         <ul className="has-scrollbar">
-                            {loading ? <Loader /> : list.map((item, i) => (
+                            { list.map((item, i) => (
                                 <li className="scrollbar-item" key={i}>
                                     <div className="work-card">
                                         <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
