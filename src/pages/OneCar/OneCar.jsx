@@ -87,7 +87,7 @@ const OneCar = () => {
       <div className="one-car">
         <div className="main-image">
          
-          <img src={data.image} alt={data.name} className="main-image-img" />
+          <img src={data.image} alt={data.name} className="main-image-img" loading="lazy"/>
         </div>
 
         <div className="thumbnails">

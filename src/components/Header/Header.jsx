@@ -19,7 +19,7 @@ function Header() {
       <div className="container">
 
         <a href="/deluxe-auto" className="logo">
-          <img src="/deluxe-auto/images/logo.png" width="128" height="63" alt="autofix home" />
+          <img src="/deluxe-auto/images/logo.png" width="128" height="63" alt="autofix home" loading="lazy"/>
         </a>
 
         <nav

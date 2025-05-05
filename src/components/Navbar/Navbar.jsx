@@ -22,7 +22,7 @@ const logout = ()=>{
    
   return (
     <div className='navbar'> 
-        <Link to='/deluxe-auto'><img src="/deluxe-auto/icon.png" alt="" className='logo'/></Link>
+        <Link to='/deluxe-auto'><img src="/deluxe-auto/icon.png" alt="" loading="lazy" className='logo'/></Link>
 
         <ul className="navbar-menu">
             <Link  to='/dubai-restaurant' onClick={()=>setMenu("home")} className={menu==="home"?"active":""}>{t('home')}</Link>
