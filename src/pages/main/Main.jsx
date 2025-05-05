@@ -8,26 +8,31 @@ import Loader from "../../components/Loader/Loader";
 const Main = () => {
     const { t } = useTranslation();
     const lang = i18n.language;
-    const url =  import.meta.env.VITE_API_URL;
+    const url = import.meta.env.VITE_API_URL;
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const fetchList = async () => {
-        const response = await axios.get(`${url + "/api/car/list"}`);
-        if (response.data.success) {
-          setList(response.data.data);
-          setLoading(false);
-        } else {
-          toast.error("Error");
-          setLoading(false);
+        try {
+            const response = await axios.get(`${url}/api/car/list`);
+            if (response.data.success) {
+                setList(response.data.data);
+            } else {
+                toast.error("Fehler beim Laden der Fahrzeugliste");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Serverfehler beim Laden der Daten");
+        } finally {
+            setLoading(false);
         }
-      }
-    
-      useEffect(() => {
+    }
+
+    useEffect(() => {
         fetchList();
-    
-      }, [])
-      
+
+    }, [])
+
     return (
         <main>
             <article>
@@ -49,10 +54,10 @@ const Main = () => {
                                 Entdecken Sie unsere große Auswahl an hochwertigen Gebrauchtwagen zu attraktiven Preisen.
                                 Bei uns erhalten Sie Qualität und Vertrauen in jedem Fahrzeug
                             </p>
-                            <a href="#" className="btn">
+                            <Link to="/" className="btn">
                                 <span className="span">Unsere Fahrzeugangebote</span>
                                 <span className="material-symbols-rounded">arrow_forward</span>
-                            </a>
+                            </Link>
                         </div>
 
                         <figure
@@ -91,7 +96,7 @@ const Main = () => {
                                     <p className="card-text">
                                         Entdecken Sie unsere große Auswahl an geprüften Gebrauchtwagen – Qualität und faire Preise garantiert.
                                     </p>
-                                    <a href="#" className="btn-link">👉 Mehr erfahren</a>
+                                    <a href="/" className="btn-link">👉 Mehr erfahren</a>
                                 </div>
                             </li>
 
@@ -104,7 +109,7 @@ const Main = () => {
                                     <p className="card-text">
                                         Wir kaufen Ihr Fahrzeug zu besten Konditionen oder helfen Ihnen beim Finden Ihres Traumwagens.
                                     </p>
-                                    <a href="#" className="btn-link">👉 Mehr erfahren</a>
+                                    <a href="/" className="btn-link">👉 Mehr erfahren</a>
                                 </div>
                             </li>
 
@@ -117,18 +122,17 @@ const Main = () => {
                                     <p className="card-text">
                                         Unser zuverlässiger Abschleppdienst bringt Ihr Fahrzeug sicher an jeden Ort in Deutschland.
                                     </p>
-                                    <a href="#" className="btn-link">👉 Mehr erfahren</a>
+                                    <a href="/" className="btn-link">👉 Mehr erfahren</a>
                                 </div>
                             </li>
                         </ul>
-
-                        <a href="#" className="btn">
-                            <span className="span">Alle Services anzeigen</span>
-                            <span className="material-symbols-rounded">arrow_forward</span>
-                        </a>
+                        <Link to="/" className="btn">
+                                <span className="span">Alle Services anzeigen</span>
+                                <span className="material-symbols-rounded">arrow_forward</span>
+                            </Link>
                     </div>
                 </section>
-               
+
                 <section className="section work" aria-labelledby="work-label">
                     <div className="container">
                         <p className="section-subtitle :light" id="cars-label">UNSER FAHRZEUGBESTAND</p>
@@ -136,7 +140,7 @@ const Main = () => {
                             Entdecken Sie unsere große Auswahl an Fahrzeugen in unserem Ausstellungsraum. Wir bieten Ihnen Fahrzeuge in verschiedenen Modellen und Ausstattungen, die alle Ihre Bedürfnisse erfüllen.
                         </h3>
                         <ul className="has-scrollbar">
-                            {loading?<Loader />:list.map((item, i) => (
+                            {loading ? <Loader /> : list.map((item, i) => (
                                 <li className="scrollbar-item" key={i}>
                                     <div className="work-card">
                                         <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
@@ -156,7 +160,7 @@ const Main = () => {
                         </ul>
                     </div>
                 </section>
-           
+
             </article>
         </main>
     )
