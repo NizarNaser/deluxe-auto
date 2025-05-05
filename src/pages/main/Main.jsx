@@ -128,7 +128,7 @@ const Main = () => {
                         </a>
                     </div>
                 </section>
-               {loading?<Loader />:
+               
                 <section className="section work" aria-labelledby="work-label">
                     <div className="container">
                         <p className="section-subtitle :light" id="cars-label">UNSER FAHRZEUGBESTAND</p>
@@ -136,7 +136,7 @@ const Main = () => {
                             Entdecken Sie unsere große Auswahl an Fahrzeugen in unserem Ausstellungsraum. Wir bieten Ihnen Fahrzeuge in verschiedenen Modellen und Ausstattungen, die alle Ihre Bedürfnisse erfüllen.
                         </h3>
                         <ul className="has-scrollbar">
-                            {list.map((item, i) => (
+                            {loading?<Loader />:list.map((item, i) => (
                                 <li className="scrollbar-item" key={i}>
                                     <div className="work-card">
                                         <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
@@ -156,7 +156,7 @@ const Main = () => {
                         </ul>
                     </div>
                 </section>
-            }
+           
             </article>
         </main>
     )
