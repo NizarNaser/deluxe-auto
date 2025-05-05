@@ -1,0 +1,23 @@
+.footer .container {
+    position: relative;
+}
+
+.up-btn{
+    position: absolute;
+    display: block;
+    right: 20px;
+    bottom: 1px;
+    font-size: 30px;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border: 1px solid red;
+    background-color: red;
+    border-radius: 50px;
+    text-align: center;
+    opacity: 0.7;
+}
+
+.up-btn:hover{
+    opacity: 0.2;
+}

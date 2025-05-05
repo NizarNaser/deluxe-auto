@@ -1,0 +1,150 @@
+
+  
+  .one-car {
+    max-width: 800px;
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    margin: 100px auto;
+
+  }
+  
+  /* الصور */
+  .one-car .main-image {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .one-car .main-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+  }
+  
+  .one-car .thumbnails {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    overflow-y: hidden;
+    padding: 10px;
+  }
+  
+  .one-car .thumbnails img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  
+  .one-car .thumbnails img.active,
+  .one-car .thumbnails img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    border: 2px solid #007BFF;
+  }
+  
+  /* معلومات السيارة */
+  .one-car .car-info {
+    margin-top: 20px;
+  }
+  
+  .one-car .car-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .one-car .car-info .price {
+    color: #007BFF;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .one-car .specs {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .one-car .specs li {
+    margin-bottom: 5px;
+  }
+  
+  /* وصف السيارة */
+  .one-car .car-description {
+    margin-top: 20px;
+  }
+  
+  .one-car .car-description h3 {
+    margin-bottom: 10px;
+  }
+  
+  /* تقييم النجوم */
+  .one-car .rating-section {
+    margin-top: 30px;
+  }
+  
+  .one-car .stars {
+    display: flex;
+    gap: 5px;
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .one-car .stars .star.active {
+    color: gold;
+  }
+  
+  /* التعليقات */
+  .one-car .comment-section {
+    margin-top: 20px;
+  }
+  
+  .one-car textarea#comment {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .one-car button#submitComment {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .one-car button#submitComment:hover {
+    background-color: #0056b3;
+  }
+  
+  .one-car #comments-list {
+    margin-top: 20px;
+  }
+  
+  .one-car #comments-list p {
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .one-car .thumbnails img {
+      width: 60px;
+      height: 45px;
+    }
+  }
+  
