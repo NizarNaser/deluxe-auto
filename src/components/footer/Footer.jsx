@@ -13,7 +13,7 @@ function Footer() {
         <div className="footer-brand">
 
           <a href="#" className="logo">
-            <img src="/images/logo.png" width="128" height="63" alt="autofix home"/>
+            <img src="/images/logo.webp" width="128" height="63" alt="autofix home"/>
           </a>
 
           <p className="footer-text">
@@ -37,7 +37,7 @@ Bei uns erhalten Sie Qualität und Vertrauen in jedem Fahrzeug
 
             <li>
               <a href="https://home.mobile.de/NASERMAZENUNDSAIEDMOKHAMEDRAIEDGBR#ses" className="social-link">
-                <img src="/images/Mobile-de-logo.svg.png" alt="twitter"/>
+                <img src="/images/Mobile-de.webp" alt="Mobile-de"/>
               </a>
             </li>
 
@@ -101,7 +101,7 @@ Bei uns erhalten Sie Qualität und Vertrauen in jedem Fahrzeug
 
       </div>
       
-      <img src="/images/footer-shape-3.png" width="637" height="173" loading="lazy" alt="Shape"
+      <img src="/images/footer-shape-3.webp" width="637" height="173" loading="lazy" alt="Shape"
         className="shape shape-3 move-anim"/>
 
     </div>
@@ -111,10 +111,10 @@ Bei uns erhalten Sie Qualität und Vertrauen in jedem Fahrzeug
 
         <p className="copyright">Copyright 2025, auto delux All Rights Reserved.</p>
 
-        <img src="/images/footer-shape-2.png" width="778" height="335" loading="lazy" alt="Shape"
+        <img src="/images/footer-shape-2.webp" width="778" height="335" loading="lazy" alt="Shape"
           className="shape shape-2"/>
 
-        <img src="/images/footer-shape-1.png" width="805" height="652" loading="lazy" alt="Red Car"
+        <img src="/images/footer-shape-1.webp" width="805" height="652" loading="lazy" alt="Red Car"
           className="shape shape-1 move-anim"/>
 
       </div>

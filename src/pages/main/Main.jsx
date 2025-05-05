@@ -42,7 +42,7 @@ const Main = () => {
                 <section
                     className="hero has-bg-image"
                     aria-label="home"
-                    style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
+                    style={{ backgroundImage: "url('/images/hero-bg.webp')" }}
                 >
                     <div className="container">
                         <div className="hero-content">
@@ -70,7 +70,7 @@ const Main = () => {
                             }}
                         >
                             <img
-                                src="/images/hero-banner.png"
+                                src="/images/hero-banner.webp"
                                 width="1228"
                                 height="789"
                                 alt="red motor vehicle"
@@ -83,7 +83,7 @@ const Main = () => {
                 <section
                     className="section service has-bg-image"
                     aria-labelledby="service-label"
-                    style={{ backgroundImage: "url('/images/service-bg.jpg')" }}
+                    style={{ backgroundImage: "url('/images/service-bg.webp')" }}
                 >
                     <div className="container">
                         <p className="section-subtitle :light" id="service-label">Unsere Leistungen</p>
@@ -92,7 +92,7 @@ const Main = () => {
                             <li>
                                 <div className="service-card">
                                     <figure className="card-icon">
-                                        <img src="/images/services-1.png" width="110" height="110" loading="lazy" alt="Engine Repair" />
+                                        <img src="/images/services-1.webp" width="110" height="110" loading="lazy" alt="Engine Repair" />
                                     </figure>
                                     <h3 className="h3 card-title">Gebrauchtwagenverkauf</h3>
                                     <p className="card-text">
@@ -105,7 +105,7 @@ const Main = () => {
                             <li>
                                 <div className="service-card">
                                     <figure className="card-icon">
-                                        <img src="/images/services-2.png" width="110" height="110" loading="lazy" alt="Brake Repair" />
+                                        <img src="/images/services-2.webp" width="110" height="110" loading="lazy" alt="Brake Repair" />
                                     </figure>
                                     <h3 className="h3 card-title"> An- und Verkauf von Fahrzeugen</h3>
                                     <p className="card-text">
@@ -118,7 +118,7 @@ const Main = () => {
                             <li>
                                 <div className="service-card">
                                     <figure className="card-icon">
-                                        <img src="/images/services-3.png" width="110" height="110" loading="lazy" alt="Tire Repair" />
+                                        <img src="/images/services-3.webp" width="110" height="110" loading="lazy" alt="Tire Repair" />
                                     </figure>
                                     <h3 className="h3 card-title"> Abschlepp- und Transportservice deutschlandweit</h3>
                                     <p className="card-text">
