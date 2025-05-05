@@ -11,7 +11,7 @@ function Home() {
   return (
     <div>
       <Helmet>
-      <link rel="icon" type="image/svg+xml" href="/deluxe-auto/icon.png" />
+      <link rel="icon" type="image/svg+xml" href="/icon.png" />
         <title>{t('title')}</title>
         <meta name="description" content={t('description')} />
         <meta name="keywords" content={t('keywords')} />

@@ -13,22 +13,22 @@ const OneCar = () => {
 
   
   const thumbnails = [
-    "/deluxe-auto/images/work-1.jpg",
-    "/deluxe-auto/images/work-2.jpg",
-    "/deluxe-auto/images/work-3.jpg",
-    "/deluxe-auto/images/work-4.jpg",
-    "/deluxe-auto/images/work-2.jpg",
-    "/deluxe-auto/images/work-3.jpg",
-    "/deluxe-auto/images/work-4.jpg",
-    "/deluxe-auto/images/work-2.jpg",
-    "/deluxe-auto/images/work-3.jpg",
-    "/deluxe-auto/images/work-4.jpg",
-    "/deluxe-auto/images/work-2.jpg",
-    "/deluxe-auto/images/work-3.jpg",
-    "/deluxe-auto/images/work-4.jpg",
-    "/deluxe-auto/images/work-2.jpg",
-    "/deluxe-auto/images/work-3.jpg",
-    "/deluxe-auto/images/work-4.jpg",
+    "/images/work-1.jpg",
+    "/images/work-2.jpg",
+    "/images/work-3.jpg",
+    "/images/work-4.jpg",
+    "/images/work-2.jpg",
+    "/images/work-3.jpg",
+    "/images/work-4.jpg",
+    "/images/work-2.jpg",
+    "/images/work-3.jpg",
+    "/images/work-4.jpg",
+    "/images/work-2.jpg",
+    "/images/work-3.jpg",
+    "/images/work-4.jpg",
+    "/images/work-2.jpg",
+    "/images/work-3.jpg",
+    "/images/work-4.jpg",
   ];
 
   const [currentImage, setCurrentImage] = useState(thumbnails[0]);
@@ -77,7 +77,7 @@ const OneCar = () => {
   return (
     <>
       <Helmet>
-      <link rel="icon" type="image/svg+xml" href="/deluxe-auto/icon.png" />
+      <link rel="icon" type="image/svg+xml" href="/icon.png" />
         <title>{data.name}</title>
         <meta name="description" content={t('description')} />
         <meta name="keywords" content={t('keywords')} />

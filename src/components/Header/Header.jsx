@@ -30,7 +30,7 @@ function Header() {
           <ul className="navbar-list">
 
             <li>
-              <a href="/deluxe-auto" className="navbar-link">Home</a>
+              <a href="/" className="navbar-link">Home</a>
             </li>
 
             <li>

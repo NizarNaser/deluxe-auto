@@ -22,10 +22,10 @@ const logout = ()=>{
    
   return (
     <div className='navbar'> 
-        <Link to='/deluxe-auto'><img src="/deluxe-auto/icon.png" alt="" loading="lazy" className='logo'/></Link>
+        <Link to='/'><img src="/icon.png" alt="" loading="lazy" className='logo'/></Link>
 
         <ul className="navbar-menu">
-            <Link  to='/dubai-restaurant' onClick={()=>setMenu("home")} className={menu==="home"?"active":""}>{t('home')}</Link>
+            <Link  to='/' onClick={()=>setMenu("home")} className={menu==="home"?"active":""}>{t('home')}</Link>
             <a href='#explore-menu' onClick={()=>setMenu("menu")} className={menu==="menu"?"active":""}>{t('menu')}</a>
             <a href='#footer'  onClick={()=>setMenu("contact-us")}className={menu==="contact-us"?"active":""}>{t('contact_us')}</a>
         </ul>
