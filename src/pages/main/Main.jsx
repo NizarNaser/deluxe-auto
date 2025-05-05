@@ -18,7 +18,7 @@ const Main = () => {
             console.log("API response:", response.data);
             if (response.data.success) {
                 setList(response.data.data);
-                
+
             } else {
                 toast.error("Fehler beim Laden der Fahrzeugliste");
             }
@@ -129,9 +129,9 @@ const Main = () => {
                             </li>
                         </ul>
                         <Link to="/" className="btn">
-                                <span className="span">Alle Services anzeigen</span>
-                                <span className="material-symbols-rounded">arrow_forward</span>
-                            </Link>
+                            <span className="span">Alle Services anzeigen</span>
+                            <span className="material-symbols-rounded">arrow_forward</span>
+                        </Link>
                     </div>
                 </section>
 
@@ -142,24 +142,30 @@ const Main = () => {
                             Entdecken Sie unsere große Auswahl an Fahrzeugen in unserem Ausstellungsraum. Wir bieten Ihnen Fahrzeuge in verschiedenen Modellen und Ausstattungen, die alle Ihre Bedürfnisse erfüllen.
                         </h3>
                         <ul className="has-scrollbar">
-                            { list.map((item) => (
-                                
-                                <li className="scrollbar-item" key={item._id}>
-                                    <div className="work-card">
-                                        <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
-                                            <img  src={item.image} width="350" height="406" loading="lazy" alt={item.name} className="img-cover" />
-                                        </figure>
-                                        <div className="card-content">
-                                            <p className="card-subtitle">Auto Repair</p>
-                                            <h3 className="h3 card-title">{item.name}</h3>
-                                            <Link to={`/one-car/${item._id}`} className="card-btn">
-                                                <span className="material-symbols-rounded">arrow_forward</span>
-                                            </Link>
+                            {loading ? <Loader /> : (
+                                Array.isArray(list) ? (
+                                    list.map((item) => (
 
-                                        </div>
-                                    </div>
-                                </li>
-                            ))}
+                                        <li className="scrollbar-item" key={item._id}>
+                                            <div className="work-card">
+                                                <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
+                                                    <img src={item.image} width="350" height="406" loading="lazy" alt={item.name} className="img-cover" />
+                                                </figure>
+                                                <div className="card-content">
+                                                    <p className="card-subtitle">Auto Repair</p>
+                                                    <h3 className="h3 card-title">{item.name}</h3>
+                                                    <Link to={`/one-car/${item._id}`} className="card-btn">
+                                                        <span className="material-symbols-rounded">arrow_forward</span>
+                                                    </Link>
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                        ))
+                                    ) : (
+                                      <p>Daten konnten nicht geladen werden.</p>
+                                    )
+                                  )}
                         </ul>
                     </div>
                 </section>
