@@ -15,6 +15,7 @@ const Main = () => {
     const fetchList = async () => {
         try {
             const response = await axios.get(`${url}/api/car/list`);
+            console.log("API response:", response.data);
             if (response.data.success) {
                 setList(response.data.data);
                 
