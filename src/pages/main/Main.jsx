@@ -17,7 +17,7 @@ const Main = () => {
             const response = await axios.get(`${url}/api/car/list`);
             if (response.data.success) {
                 setList(response.data.data);
-                console.log("list data:", list)
+                
             } else {
                 toast.error("Fehler beim Laden der Fahrzeugliste");
             }
@@ -31,7 +31,7 @@ const Main = () => {
 
     useEffect(() => {
         fetchList();
-
+        console.log("list data:", list)
     }, [])
 
     return (
