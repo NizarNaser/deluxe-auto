@@ -7,7 +7,7 @@ import StoreContextProvider from './context/StoreContext.jsx'
 import './i18n.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter  basename="/deluxe-auto" future={{ 
+  <BrowserRouter   future={{ 
     v7_startTransition: true, 
     v7_relativeSplatPath: true 
   }}>
