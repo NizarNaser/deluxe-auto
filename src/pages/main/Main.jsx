@@ -27,7 +27,7 @@ const Main = () => {
         fetchList();
     
       }, [])
-      if (loading) return <Loader />;
+      
     return (
         <main>
             <article>
@@ -128,7 +128,7 @@ const Main = () => {
                         </a>
                     </div>
                 </section>
-
+               {loading?<Loader />:
                 <section className="section work" aria-labelledby="work-label">
                     <div className="container">
                         <p className="section-subtitle :light" id="cars-label">UNSER FAHRZEUGBESTAND</p>
@@ -156,7 +156,7 @@ const Main = () => {
                         </ul>
                     </div>
                 </section>
-
+            }
             </article>
         </main>
     )
