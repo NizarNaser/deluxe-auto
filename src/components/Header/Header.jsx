@@ -18,8 +18,8 @@ function Header() {
     <header className="header" id="header">
       <div className="container">
 
-        <a href="/deluxe-auto" className="logo">
-          <img src="/deluxe-auto/images/logo.png" width="128" height="63" alt="autofix home" loading="lazy"/>
+        <a href="/" className="logo">
+          <img src="/images/logo.png" width="128" height="63" alt="autofix home" loading="lazy"/>
         </a>
 
         <nav
