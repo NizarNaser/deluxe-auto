@@ -17,6 +17,7 @@ const Main = () => {
             const response = await axios.get(`${url}/api/car/list`);
             if (response.data.success) {
                 setList(response.data.data);
+                console.log("list data:", list)
             } else {
                 toast.error("Fehler beim Laden der Fahrzeugliste");
             }
@@ -140,11 +141,12 @@ const Main = () => {
                             Entdecken Sie unsere große Auswahl an Fahrzeugen in unserem Ausstellungsraum. Wir bieten Ihnen Fahrzeuge in verschiedenen Modellen und Ausstattungen, die alle Ihre Bedürfnisse erfüllen.
                         </h3>
                         <ul className="has-scrollbar">
-                            { list.map((item, i) => (
-                                <li className="scrollbar-item" key={i}>
+                            { list.map((item) => (
+                                
+                                <li className="scrollbar-item" key={item._id}>
                                     <div className="work-card">
                                         <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
-                                            <img src={item.image} width="350" height="406" loading="lazy" alt={item.name} className="img-cover" />
+                                            <img  src={item.image} width="350" height="406" loading="lazy" alt={item.name} className="img-cover" />
                                         </figure>
                                         <div className="card-content">
                                             <p className="card-subtitle">Auto Repair</p>
