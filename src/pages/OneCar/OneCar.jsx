@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import axios from "axios";
 import i18n from '../../i18n';
 import './OneCar.css';
-
+import ReactMarkdown from 'react-markdown';
 const OneCar = () => {
   const { id } = useParams();
   const { t } = useTranslation();
@@ -117,7 +117,7 @@ const OneCar = () => {
         <div className="car-description">
           <h3>description :</h3>
           <p>
-            {data.description}
+          <ReactMarkdown>{data.description}</ReactMarkdown>
           </p>
         </div>
 
