@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from "axios"
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../i18n';
+import { StoreContext } from "../../context/StoreContext";
 import Loader from "../../components/Loader/Loader";
 const Main = () => {
     const { t } = useTranslation();
     const lang = i18n.language;
     const url = import.meta.env.VITE_API_URL;
     const [list, setList] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { setLoading, loading } = useContext(StoreContext);
 
     const fetchList = async () => {
         try {
@@ -144,31 +145,52 @@ const Main = () => {
                             Entdecken Sie unsere große Auswahl an Fahrzeugen in unserem Ausstellungsraum. Wir bieten Ihnen Fahrzeuge in verschiedenen Modellen und Ausstattungen, die alle Ihre Bedürfnisse erfüllen.
                         </h3>
                         <ul className="has-scrollbar">
-                            {loading ? <Loader /> : (
-                                Array.isArray(list) ? (
-                                    list.map((item) => (
+    {loading ? <Loader /> : (
+        Array.isArray(list) ? (
+            list.map((item) => (
+                <li className="scrollbar-item" key={item._id}>
+                    <div className="work-card">
+                        <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
+                            {/* عرض الصور من قاعدة البيانات */}
+                            {item.images && item.images.length > 0 ? (
+                                item.images.map((image, index) => (
+                                    <img
+                                        key={index}
+                                        src={image.url}  // تأكد أن هذا الرابط صحيح
+                                        width="350"
+                                        height="406"
+                                        loading="lazy"
+                                        alt={`Car image ${index + 1}`}
+                                        className="img-cover"
+                                    />
+                                ))
+                            ) : (
+                                <img
+                                    src="/images/default-car-image.webp"  // صورة افتراضية في حال عدم وجود صور
+                                    width="350"
+                                    height="406"
+                                    loading="lazy"
+                                    alt="Default car image"
+                                    className="img-cover"
+                                />
+                            )}
+                        </figure>
+                        <div className="card-content">
+                            <p className="card-subtitle">Auto Repair</p>
+                            <h3 className="h3 card-title">{item.name}</h3>
+                            <Link to={`/one-car/${item._id}`} className="card-btn">
+                                <span className="material-symbols-rounded">arrow_forward</span>
+                            </Link>
+                        </div>
+                    </div>
+                </li>
+            ))
+        ) : (
+            <p>Daten konnten nicht geladen werden.</p>
+        )
+    )}
+</ul>
 
-                                        <li className="scrollbar-item" key={item._id}>
-                                            <div className="work-card">
-                                                <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
-                                                    <img src={item.image} width="350" height="406" loading="lazy" alt={item.name} className="img-cover" />
-                                                </figure>
-                                                <div className="card-content">
-                                                    <p className="card-subtitle">Auto Repair</p>
-                                                    <h3 className="h3 card-title">{item.name}</h3>
-                                                    <Link to={`/one-car/${item._id}`} className="card-btn">
-                                                        <span className="material-symbols-rounded">arrow_forward</span>
-                                                    </Link>
-
-                                                </div>
-                                            </div>
-                                        </li>
-                                        ))
-                                    ) : (
-                                      <p>Daten konnten nicht geladen werden.</p>
-                                    )
-                                  )}
-                        </ul>
                     </div>
                 </section>
 

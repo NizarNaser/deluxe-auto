@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import Loader from "../components/Loader/Loader";
 export const StoreContext = createContext(null)
 import { toast } from "react-toastify";
 const StoreContextProvider = (props) => {
@@ -36,12 +35,13 @@ const StoreContextProvider = (props) => {
         }
         loadData()
     }, [])
-   // if (loading) return <Loader />;
     const contextValue = {
         car_list,
         url,
         token,
         setToken,
+        loading, 
+        setLoading
 
     }
     return (

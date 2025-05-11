@@ -1,41 +1,30 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import axios from "axios";
-import i18n from '../../i18n';
 import './OneCar.css';
 import ReactMarkdown from 'react-markdown';
+import { StoreContext } from "../../context/StoreContext";
+import Loader from "../../components/Loader/Loader";
 const OneCar = () => {
   const { id } = useParams();
-  const { t } = useTranslation();
-  const url= import.meta.env.VITE_API_URL;
-
-  
-  const thumbnails = [
-    "/images/work-1.jpg",
-    "/images/work-2.jpg",
-    "/images/work-3.jpg",
-    "/images/work-4.jpg",
-    "/images/work-2.jpg",
-    "/images/work-3.jpg",
-    "/images/work-4.jpg",
-    "/images/work-2.jpg",
-    "/images/work-3.jpg",
-    "/images/work-4.jpg",
-    "/images/work-2.jpg",
-    "/images/work-3.jpg",
-    "/images/work-4.jpg",
-    "/images/work-2.jpg",
-    "/images/work-3.jpg",
-    "/images/work-4.jpg",
-  ];
-
-  const [currentImage, setCurrentImage] = useState(thumbnails[0]);
-  const [activeThumb, setActiveThumb] = useState(thumbnails[0]);
+  const url = import.meta.env.VITE_API_URL;
+  const { setLoading, loading } = useContext(StoreContext);
+  const [currentImage, setCurrentImage] = useState('');
+  const [activeThumb, setActiveThumb] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
+
+  const [data, setData] = useState({
+    name: "",
+    marka: "",
+    price: "",
+    year: "",
+    description: "",
+    image: "", // الصورة الرئيسية
+    images: []  // الصور الإضافية
+  });
 
   const handleThumbClick = (src) => {
     setCurrentImage(src);
@@ -54,70 +43,61 @@ const OneCar = () => {
       alert('الرجاء كتابة تعليق قبل الإرسال.');
     }
   };
-  const [data, setData] = useState({
-    name: "",
-    name_de: "",
-    name_ar: "",
-    marka:"",
-    price: "",
-    year: "",
-    description: "",
-    description_de:"",
-    description_ar:"",
-    image: "", // تأكد من أن الصورة مهيأة مسبقًا
-  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    axios.get(`${url+"/api/car/one-item/"+id}`)
-    .then((res) => {
-      setData(res.data);
-    })
-    .catch((err) => console.error(err));
+    axios.get(`${url}/api/car/one-item/${id}`)
+      .then((res) => {
+        setData(res.data);
+        setLoading(false);
+        // تعيين الصورة الرئيسية فقط عند تحميل البيانات
+        if (res.data.images.length > 0) {
+          setCurrentImage(res.data.images[0].url); // تعيين أول صورة كصورة رئيسية
+          setActiveThumb(res.data.images[0].url); // تعيين الصورة النشطة
+        }
+      })
+      .catch((err) => console.error(err));
+      setLoading(false);
   }, [id]);
+
   return (
     <>
       <Helmet>
-      <link rel="icon" type="image/svg+xml" href="/icon.png" />
+        <link rel="icon" type="image/svg+xml" href="/icon.png" />
         <title>{data.name}</title>
-        <meta name="description" content={t('description')} />
-        <meta name="keywords" content={t('keywords')} />
+        <meta name="description" content="Entdecken Sie unsere große Auswahl an hochwertigen Gebrauchtwagen zu attraktiven Preisen. Bei uns erhalten Sie Qualität und Vertrauen in jedem Fahrzeug" />
+        <meta name="keywords" content="deluxe-auto, An- und Verkauf von Gebrauchtwagen, We Provide Great Services For your Vehicle, Gebrauchtwagenverkauf, Abschlepp- und Transportservice deutschlandweit" />
         <meta name="robots" content="index, follow" />
       </Helmet>
 
       <div className="one-car">
         <div className="main-image">
-         
-          <img src={data.image} alt={data.name} className="main-image-img" loading="lazy"/>
+          {/* عرض الصورة الرئيسية هنا */}
+          {currentImage && <img src={currentImage} alt={data.name} className="main-image-img" loading="lazy" />}
         </div>
 
         <div className="thumbnails">
-          {thumbnails.map((thumb, index) => (
+          {/* عرض الصور الإضافية في الـ thumbnails */}
+          {loading ? <Loader /> : (
+          data.images.length > 0 && data.images.map((thumb, index) => (
             <img
               key={index}
-              src={thumb}
-              alt={data.name}
-              className={`thumb ${activeThumb === thumb ? 'active' : ''}`}
-              onClick={() => handleThumbClick(thumb)}
+              src={thumb.url}
+              alt={`thumb-${index}`}
+              className={`thumb ${activeThumb === thumb.url ? 'active' : ''}`}
+              onClick={() => handleThumbClick(thumb.url)}
             />
-          ))}
+          )))}
         </div>
 
         <div className="car-info">
-          <h2>  {data.name} {data.marka}</h2>
-          <p className="price">price: <strong>{data.price}  &#8364;</strong></p>
-          <ul className="specs">
-            <li>marka : {data.marka} </li>
-            <li>model :{data.year}</li>
-            <li>color : </li>
-            <li>المحرك: 2.5 لتر هايبرد</li>
-            <li>ناقل الحركة: أوتوماتيكي</li>
-          </ul>
+          <h2>{data.name} {data.marka}</h2>
+          <p className="price">price: <strong>{data.price} &#8364;</strong></p>
         </div>
 
         <div className="car-description">
-          <h3>description :</h3>
           <p>
-          <ReactMarkdown>{data.description}</ReactMarkdown>
+            <ReactMarkdown>{data.description}</ReactMarkdown>
           </p>
         </div>
 
@@ -139,14 +119,14 @@ const OneCar = () => {
           </p>
 
           <div className="comment-section">
-            <h3> add comment :</h3>
+            <h3>إضافة تعليق :</h3>
             <textarea
-            rows={5}
+              rows={5}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="اكتب تعليقك هنا..."
             />
-            <button onClick={handleCommentSubmit}>send </button>
+            <button onClick={handleCommentSubmit}>إرسال</button>
 
             <div id="comments-list">
               {comments.map((c, i) => (
