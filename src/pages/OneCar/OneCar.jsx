@@ -40,7 +40,7 @@ const OneCar = () => {
       setComments([...comments, comment]);
       setComment('');
     } else {
-      alert('الرجاء كتابة تعليق قبل الإرسال.');
+      alert('Bitte schreiben Sie vor dem Absenden einen Kommentar.');
     }
   };
 
@@ -96,13 +96,13 @@ const OneCar = () => {
         </div>
 
         <div className="car-description">
-          <p>
+        
             <ReactMarkdown>{data.description}</ReactMarkdown>
-          </p>
+          
         </div>
 
         <div className="rating-section">
-          <h3>تقييم السيارة:</h3>
+          <h3> Fahrzeugbewertung</h3>
           <div className="stars">
             {[1, 2, 3, 4, 5].map((val) => (
               <span
@@ -119,14 +119,15 @@ const OneCar = () => {
           </p>
 
           <div className="comment-section">
-            <h3>إضافة تعليق :</h3>
+            <h3>Einen Kommentar hinzufügen</h3>
             <textarea
-              rows={5}
+              rows={6}
+              
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              placeholder="اكتب تعليقك هنا..."
+              placeholder="Schreiben Sie hier Ihren Kommentar..."
             />
-            <button onClick={handleCommentSubmit}>إرسال</button>
+            <button onClick={handleCommentSubmit}>schicken</button>
 
             <div id="comments-list">
               {comments.map((c, i) => (

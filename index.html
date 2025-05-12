@@ -1,6 +1,21 @@
 <!doctype html>
 <html lang="en">
   <head>
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E32YMH7ZF5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  // إعداد الوضع الافتراضي للموافقة (لا توجد موافقة مبدئيًا)
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+  gtag('config', 'G-E32YMH7ZF5');
+</script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,20 +27,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" media="print" onload="this.media='all'" />
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" /></noscript>
-
-    
-  
     <!-- 
       - material icon font
     -->
     <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@40,600,0,0" />
-  
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@40,600,0,0" /> 
     <!-- 
       - custom css link
     -->
     <link rel="stylesheet" href="/css/style.css">
-  
     <!-- 
       - preload images
     -->
@@ -39,6 +49,35 @@
   <body>
     <div id="root"></div>
     <script type="module" src="./src/main.jsx"></script>
+    <div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background: #222; color: white; padding: 10px; text-align: center; z-index: 1000;">
+     <p> Diese Seite verwendet Cookies, um Ihre Erfahrung zu verbessern. </p>
+      <button onclick="acceptCookies()" style="display: block; color: aliceblue; margin: 0 auto; border: 1px solid white; border-radius: 5px;padding: 5px;">Ich stimme zu</button>
+    </div>
+    
+    <script>
+      function acceptCookies() {
+        // تحديث الموافقة
+        gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'analytics_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
+    
+        // إخفاء البانر
+        document.getElementById('cookie-banner').style.display = 'none';
+    
+        // حفظ الموافقة في localStorage (اختياري)
+        localStorage.setItem('cookie_consent', 'true');
+      }
+    
+      // عرض البانر فقط إذا لم تتم الموافقة بعد
+      window.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem('cookie_consent') === 'true') {
+          acceptCookies(); // الموافقة مسبقًا
+        }
+      });
+    </script>
   </body>
 </html>
 

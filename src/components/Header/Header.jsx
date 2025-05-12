@@ -1,9 +1,7 @@
 import "./Header.css";
-import { useTranslation } from 'react-i18next';
 import { useRef, useState } from "react";
 
 function Header() {
-  const { t } = useTranslation();
   const navbarRef = useRef(null);
   const [isNavActive, setIsNavActive] = useState(false);
 
@@ -30,7 +28,7 @@ function Header() {
           <ul className="navbar-list">
 
             <li>
-              <a href="/" className="navbar-link">Home</a>
+              <a href="/" className="navbar-link">Heim</a>
             </li>
 
             <li>
@@ -47,9 +45,8 @@ function Header() {
 
           </ul>
         </nav>
-
         <a href="#" className="btn btn-primary">
-          <span className="span">Ein Angebot einholen</span>
+          <span  className="span">Ein Angebot einholen</span>
           <span className="material-symbols-rounded">arrow_forward</span>
         </a>
 

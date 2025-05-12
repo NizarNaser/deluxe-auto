@@ -104,10 +104,17 @@
   /* التعليقات */
   .one-car .comment-section {
     margin-top: 20px;
+    
+  }
+  .one-car textarea{
+    width: 80%;
+    height: auto;
+    max-height: 150px;
+    max-width: 100%;
   }
   
   .one-car textarea#comment {
-    width: 100%;
+   
     height: 80px;
     padding: 10px;
     margin-bottom: 10px;

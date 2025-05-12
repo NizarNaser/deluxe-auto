@@ -1,18 +1,18 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import translationEN from './locales/en/translation.json';
-import translationUK from './locales/uk/translation.json';
+import translationDE from './locales/de/translation.json';
 
 const resources = {
   en: { translation: translationEN },
-  uk: { translation: translationUK }
+  de: { translation: translationDE }
 };
 
 i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'uk', // اللغة الافتراضية
+    lng: 'de', // اللغة الافتراضية
     fallbackLng: 'en',
     interpolation: { escapeValue: false }
   });

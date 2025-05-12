@@ -72,12 +72,12 @@ const Main = () => {
                         >
                             <img
                                 src="/images/hero-banner.webp"
-                                srcset="/images/hero-banner-small.webp 768w, /images/hero-banner.webp 1228w"
+                                srcSet="/images/hero-banner-small.webp 768w, /images/hero-banner.webp 1228w"
                                 sizes="(max-width: 768px) 100vw, 1228px"
                                 width="1228"
                                 height="789"
                                 alt="red motor vehicle"
-                                class="move-anim"
+                                className="move-anim"
                             />
                         </figure>
                     </div>
