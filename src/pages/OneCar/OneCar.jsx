@@ -35,30 +35,52 @@ const OneCar = () => {
     setRating(value);
   };
 
-  const handleCommentSubmit = () => {
-    if (comment.trim() !== '') {
-      setComments([...comments, comment]);
+  const handleCommentSubmit = async () => {
+    if (comment.trim() === '' || rating === 0) {
+      alert('يرجى كتابة تعليق واختيار تقييم.');
+      return;
+    }
+  
+    try {
+      const res = await axios.post(`${url}/api/reviews`, {
+        carId: id,
+        user: "Gast", // يمكنك لاحقًا استخدام اسم المستخدم من السياق
+        rating,
+        comment
+      });
+      setComments([res.data, ...comments]);
       setComment('');
-    } else {
-      alert('Bitte schreiben Sie vor dem Absenden einen Kommentar.');
+      setRating(0);
+    } catch (err) {
+      console.error(err);
+      alert('Fehler beim Senden des Kommentars');
     }
   };
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    axios.get(`${url}/api/car/one-item/${id}`)
-      .then((res) => {
-        setData(res.data);
+    const fetchData = async () => {
+      try {
+        const carRes = await axios.get(`${url}/api/car/one-item/${id}`);
+        setData(carRes.data);
         setLoading(false);
-        // تعيين الصورة الرئيسية فقط عند تحميل البيانات
-        if (res.data.images.length > 0) {
-          setCurrentImage(res.data.images[0].url); // تعيين أول صورة كصورة رئيسية
-          setActiveThumb(res.data.images[0].url); // تعيين الصورة النشطة
+        if (carRes.data.images.length > 0) {
+          setCurrentImage(carRes.data.images[0].url);
+          setActiveThumb(carRes.data.images[0].url);
         }
-      })
-      .catch((err) => console.error(err));
-      setLoading(false);
+  
+        const commentRes = await axios.get(`${url}/api/reviews/${id}`);
+        setComments(commentRes.data);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
   }, [id]);
+  
 
   return (
     <>
@@ -130,9 +152,21 @@ const OneCar = () => {
             <button onClick={handleCommentSubmit}>schicken</button>
 
             <div id="comments-list">
-              {comments.map((c, i) => (
-                <p key={i}>{c}</p>
-              ))}
+            {comments.length > 0 ? (
+  comments.map((c, i) => (
+    <div key={i} className="single-comment">
+      <p><strong>{c.user}:</strong> {c.comment}</p>
+      <div className="stars">
+        {[1, 2, 3, 4, 5].map((val) => (
+          <span key={val} className={`star ${c.rating >= val ? 'active' : ''}`}>&#9733;</span>
+        ))}
+      </div>
+    </div>
+  ))
+) : (
+  <p>Noch keine Kommentare.</p>
+)}
+
             </div>
           </div>
         </div>

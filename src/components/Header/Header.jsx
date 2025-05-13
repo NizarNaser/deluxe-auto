@@ -1,10 +1,10 @@
+import { useContext, useRef, useState } from "react";
+import { StoreContext } from "../../context/StoreContext"; // تأكد من المسار الصحيح حسب هيكل مشروعك
 import "./Header.css";
-import { useRef, useState } from "react";
-
 function Header() {
   const navbarRef = useRef(null);
   const [isNavActive, setIsNavActive] = useState(false);
-
+  const { userName } = useContext(StoreContext);
   const toggleNavbar = () => {
     setIsNavActive((prev) => !prev);
     if (navbarRef.current) {
@@ -17,7 +17,7 @@ function Header() {
       <div className="container">
 
         <a href="/" className="logo">
-          <img src="/images/logo.webp" width="128" height="63" alt="autofix home" loading="lazy"/>
+          <img src="/images/logo.webp" width="128" height="63" alt="autofix home" loading="lazy" />
         </a>
 
         <nav
@@ -45,10 +45,22 @@ function Header() {
 
           </ul>
         </nav>
+
+{userName ?
         <a href="#" className="btn btn-primary">
-          <span  className="span">Ein Angebot einholen</span>
-          <span className="material-symbols-rounded">arrow_forward</span>
+          <span className="span">Willkommen, <strong>{userName}</strong></span>
+       
         </a>
+ :
+ <div className="navbar-profile">
+            <img src={assets.profile_image} alt="Profile" />
+            <ul className="nav-profile-dropdown">
+              <li onClick={logout}>logout</li>
+            </ul>
+          </div>
+}
+
+      
 
         <button
           className={`nav-toggle-btn ${isNavActive ? "active" : ""}`}

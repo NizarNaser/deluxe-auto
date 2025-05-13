@@ -147,6 +147,20 @@
     margin-bottom: 10px;
   }
   
+  .single-comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .star {
+    color: gray;
+    cursor: pointer;
+  }
+  .star.active {
+    color: gold;
+  }
+  
   /* Responsive */
   @media (max-width: 600px) {
     .one-car .thumbnails img {
