@@ -4,7 +4,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 export const StoreContext = createContext(null)
 import { toast } from "react-toastify";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 const StoreContextProvider = (props) => {
     const url = import.meta.env.VITE_API_URL;
     const [token, setToken] = useState("");

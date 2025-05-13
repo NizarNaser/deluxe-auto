@@ -5,7 +5,7 @@ import { assets } from "../../assets/assets"
 import { useContext } from "react"
 import { StoreContext } from "../../context/StoreContext"
 import axios from "axios"
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode"; 
 // eslint-disable-next-line react/prop-types
 const LoginPopup = ({ setShowLogin }) => {
   const { url, setToken, loading, setLoading } = useContext(StoreContext)
