@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import Main from "../main/Main";
 
-function Home() {
+function Home({ setShowLogin }) {
 
     const { t } = useTranslation();
 
@@ -18,7 +18,7 @@ function Home() {
         <meta name="robots" content="index, follow" />
       </Helmet>
         
-        <Main/>
+        <Main setShowLogin={setShowLogin}/>
         
 
         

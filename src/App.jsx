@@ -9,26 +9,24 @@ import Header from "./components/Header/Header"
 
 
 
-function App() { 
+function App() {
+  const [showLogin, setShowLogin] = useState(false);
 
-  const [showLogin,setShowLogin] = useState(false)
   return (
-    <>
-    {showLogin?<LoginPopup setShowLogin={setShowLogin}/>:<></>}
     <div className="app">
-     
-      <Header setShowLogin={setShowLogin}/>
+      <Header setShowLogin={setShowLogin} />
+
+      {/* Login Popup */}
+      {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
+
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/one-car/:id" element={<OneCar/>}/>
-        
-
+      <Route path="/" element={<Home setShowLogin={setShowLogin} />} />
+      <Route path="/one-car/:id" element={<OneCar />} />
       </Routes>
-     <Footer/>
-    </div> 
 
-    </>
-  )
+      <Footer />
+    </div>
+  );
 }
 
 export default App

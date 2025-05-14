@@ -8,7 +8,7 @@ import axios from "axios"
 import { jwtDecode } from "jwt-decode"; 
 // eslint-disable-next-line react/prop-types
 const LoginPopup = ({ setShowLogin }) => {
-  const { url, setToken, loading, setLoading } = useContext(StoreContext)
+  const { url, setToken, loading, setLoading , setUserName,} = useContext(StoreContext)
   const [currState, setCurrState] = useState("Login")
   const [data, setData] = useState({
     name: "",
@@ -46,9 +46,10 @@ const LoginPopup = ({ setShowLogin }) => {
         localStorage.setItem("token", token);
       
         const decoded = jwtDecode(token);
-        console.log("Welcome", decoded.name); // طبع الاسم
+        setUserName(decoded.name); // ✅ مهم جدًا لعرض الاسم مباشرة في الهيدر
       
         setShowLogin(false);
+      
       } else {
         alert(response.data.message);
       }
@@ -63,7 +64,9 @@ const LoginPopup = ({ setShowLogin }) => {
 
   return (
     <div className="login-popup">
+     
       <form onSubmit={onLogin} className="login-popup-container">
+      <button onClick={() => setShowLogin(false)}>✖️</button>
         <div className="login-popup-title">
           <h2>{currState}</h2>
           <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="" />

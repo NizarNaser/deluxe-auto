@@ -10,7 +10,7 @@ const StoreContextProvider = (props) => {
     const [token, setToken] = useState("");
     const [car_list, setCarList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [userName, setUserName] = useState("");
+    const [userName, setUserName] = useState(localStorage.getItem("userName") || "");
 
 
     const fetchCarList = async () => {
@@ -33,9 +33,8 @@ const StoreContextProvider = (props) => {
             if (localStorage.getItem("token")) {
                 const savedToken = localStorage.getItem("token");
                 setToken(savedToken);
-              
                 const decoded = jwtDecode(savedToken);
-                setUserName(decoded.name); // حفظ اسم المستخدم
+                setUserName(decoded.name);
               }
               
         }

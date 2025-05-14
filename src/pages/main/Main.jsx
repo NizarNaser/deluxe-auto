@@ -33,7 +33,7 @@ const Main = () => {
 
     useEffect(() => {
         fetchList();
-        console.log("list data:", list)
+        
     }, [])
 
     return (

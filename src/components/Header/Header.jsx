@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { StoreContext } from "../../context/StoreContext"; // تأكد من المسار الصحيح حسب هيكل مشروعك
 import "./Header.css";
-import { useNavigate } from "react-router-dom";
-function Header({setShowLogin}) {
+import {  useNavigate } from "react-router-dom";
+function Header({ setShowLogin }) {
   const navbarRef = useRef(null);
   const [isNavActive, setIsNavActive] = useState(false);
-  const { userName , token,setToken} = useContext(StoreContext);
+  const { userName,setUserName, setToken,token } = useContext(StoreContext);
   const navigate = useNavigate();
   const toggleNavbar = () => {
     setIsNavActive((prev) => !prev);
@@ -15,14 +15,14 @@ function Header({setShowLogin}) {
   };
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
     setToken("");
+    setUserName(""); // <-- مهم جداً لمسح الاسم المعروض
     navigate("/");
   };
-  useEffect(() => {
-    if (!token) {
-      setShowLogin(true);
-    }
-  }, [token]);
+  
+  
+
   return (
     <header className="header" id="header">
       <div className="container">
@@ -57,17 +57,24 @@ function Header({setShowLogin}) {
           </ul>
         </nav>
 
-{userName &&(
+        {userName ?
+          <>
+            <span className="btn btn-primary">
+              Willkommen, <strong>{userName}</strong>
+            </span>
 
-  <a href="#" className="btn btn-primary">
-          <span className="span">Willkommen, <strong>{userName}</strong></span>
-       
-        </a>
-      
-)       
-}
+            <button onClick={logout} className="btn btn-primary">
+              <span className="span" > <strong>logout</strong></span>
 
-      
+            </button>
+          </>
+          : <button onClick={() => setShowLogin(true)} className="btn btn-primary">
+          <span className="span"><strong>Login</strong></span>
+        </button>
+        
+        }
+
+
 
         <button
           className={`nav-toggle-btn ${isNavActive ? "active" : ""}`}

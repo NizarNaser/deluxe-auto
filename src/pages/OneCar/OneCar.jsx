@@ -9,7 +9,7 @@ import Loader from "../../components/Loader/Loader";
 const OneCar = () => {
   const { id } = useParams();
   const url = import.meta.env.VITE_API_URL;
-  const { setLoading, loading ,userName } = useContext(StoreContext);
+  const { setLoading, loading } = useContext(StoreContext);
   const [currentImage, setCurrentImage] = useState('');
   const [activeThumb, setActiveThumb] = useState('');
   const [rating, setRating] = useState(0);
@@ -42,12 +42,17 @@ const OneCar = () => {
     }
   
     try {
+      const token = localStorage.getItem("token"); // أو استخدم الـ context للوصول إلى التوكن
       const res = await axios.post(`${url}/api/reviews`, {
         carId: id,
-        user: "Gast", // يمكنك لاحقًا استخدام اسم المستخدم من السياق
         rating,
         comment
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`  // إرسال التوكن في الهيدر
+        }
       });
+  
       setComments([res.data, ...comments]);
       setComment('');
       setRating(0);
@@ -56,6 +61,7 @@ const OneCar = () => {
       alert('Fehler beim Senden des Kommentars');
     }
   };
+  
   
 
   useEffect(() => {
