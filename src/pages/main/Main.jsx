@@ -145,8 +145,9 @@ const Main = () => {
                             Entdecken Sie unsere große Auswahl an Fahrzeugen in unserem Ausstellungsraum. Wir bieten Ihnen Fahrzeuge in verschiedenen Modellen und Ausstattungen, die alle Ihre Bedürfnisse erfüllen.
                         </h3>
                         <ul className="has-scrollbar">
-    {loading ? <Loader /> : (
+    {
         Array.isArray(list) ? (
+            loading ? <Loader /> : (
             list.map((item) => (
                 <li className="scrollbar-item" key={item._id}>
                     <div className="work-card">
@@ -185,10 +186,10 @@ const Main = () => {
                     </div>
                 </li>
             ))
-        ) : (
+        )) : (
             <p>Daten konnten nicht geladen werden.</p>
         )
-    )}
+    }
 </ul>
 
                     </div>

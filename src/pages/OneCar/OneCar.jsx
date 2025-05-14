@@ -9,7 +9,7 @@ import Loader from "../../components/Loader/Loader";
 const OneCar = () => {
   const { id } = useParams();
   const url = import.meta.env.VITE_API_URL;
-  const { setLoading, loading } = useContext(StoreContext);
+  const { setLoading, loading ,userName } = useContext(StoreContext);
   const [currentImage, setCurrentImage] = useState('');
   const [activeThumb, setActiveThumb] = useState('');
   const [rating, setRating] = useState(0);

@@ -1,17 +1,28 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { StoreContext } from "../../context/StoreContext"; // تأكد من المسار الصحيح حسب هيكل مشروعك
 import "./Header.css";
-function Header() {
+import { useNavigate } from "react-router-dom";
+function Header({setShowLogin}) {
   const navbarRef = useRef(null);
   const [isNavActive, setIsNavActive] = useState(false);
-  const { userName } = useContext(StoreContext);
+  const { userName , token,setToken} = useContext(StoreContext);
+  const navigate = useNavigate();
   const toggleNavbar = () => {
     setIsNavActive((prev) => !prev);
     if (navbarRef.current) {
       navbarRef.current.classList.toggle("active");
     }
   };
-
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/");
+  };
+  useEffect(() => {
+    if (!token) {
+      setShowLogin(true);
+    }
+  }, [token]);
   return (
     <header className="header" id="header">
       <div className="container">
@@ -46,18 +57,14 @@ function Header() {
           </ul>
         </nav>
 
-{userName ?
-        <a href="#" className="btn btn-primary">
+{userName &&(
+
+  <a href="#" className="btn btn-primary">
           <span className="span">Willkommen, <strong>{userName}</strong></span>
        
         </a>
- :
- <div className="navbar-profile">
-            <img src={assets.profile_image} alt="Profile" />
-            <ul className="nav-profile-dropdown">
-              <li onClick={logout}>logout</li>
-            </ul>
-          </div>
+      
+)       
 }
 
       

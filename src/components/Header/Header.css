@@ -13,4 +13,56 @@
     font-weight: 500;
     margin-left: 1rem;
   }
+
+  .navbar-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
   
+  /* صورة المستخدم */
+  .navbar-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: 0.3s;
+  }
+  
+  .navbar-profile img:hover {
+    transform: scale(1.1);
+  }
+  
+  /* القائمة المنسدلة */
+  .nav-profile-dropdown {
+    position: absolute;
+    top: 45px;
+    right: -30px;
+    background: white;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    list-style: none;
+    padding: 10px;
+    width: 120px;
+    transition: 1s;
+  }
+  
+  .navbar-profile:hover .nav-profile-dropdown {
+    display: block;
+    
+  }
+  
+  .nav-profile-dropdown li {
+    padding: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.6s;
+  }
+  
+  .nav-profile-dropdown li:hover {
+    background: #f0f0f0;
+  }
+    

@@ -17,7 +17,7 @@ function App() {
     {showLogin?<LoginPopup setShowLogin={setShowLogin}/>:<></>}
     <div className="app">
      
-      <Header/>
+      <Header setShowLogin={setShowLogin}/>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/one-car/:id" element={<OneCar/>}/>
