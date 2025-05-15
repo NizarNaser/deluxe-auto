@@ -12,6 +12,7 @@ const Main = () => {
     const url = import.meta.env.VITE_API_URL;
     const [list, setList] = useState([]);
     const { setLoading, loading } = useContext(StoreContext);
+    const [reviews, setReviews] = useState([]);
 
     const fetchList = async () => {
         try {
@@ -30,10 +31,30 @@ const Main = () => {
             setLoading(false);
         }
     }
+    const fetchReviews = async () => {
+        try {
+            const response = await axios.get(`${url}/api/reviews/list-comment`);
+            if (response.data.success) {
+                setReviews(response.data.data);
+            } else {
+                toast.error("Fehler beim Laden der Bewertungen");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Serverfehler bei Bewertungen");
+        }
+    }
+    const getAverageRating = (carId) => {
+        const carReviews = reviews.filter(r => r.carId === carId);
+        if (carReviews.length === 0) return null;
+        const average = carReviews.reduce((acc, r) => acc + r.rating, 0) / carReviews.length;
+        return average.toFixed(1);
+    }
 
     useEffect(() => {
         fetchList();
-        
+        fetchReviews();
+
     }, [])
 
     return (
@@ -145,52 +166,58 @@ const Main = () => {
                             Entdecken Sie unsere große Auswahl an Fahrzeugen in unserem Ausstellungsraum. Wir bieten Ihnen Fahrzeuge in verschiedenen Modellen und Ausstattungen, die alle Ihre Bedürfnisse erfüllen.
                         </h3>
                         <ul className="has-scrollbar">
-    {
-        Array.isArray(list) ? (
-            loading ? <Loader /> : (
-            list.map((item) => (
-                <li className="scrollbar-item" key={item._id}>
-                    <div className="work-card">
-                        <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
-                            {/* عرض الصور من قاعدة البيانات */}
-                            {item.images && item.images.length > 0 ? (
-                                item.images.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={image.url}  // تأكد أن هذا الرابط صحيح
-                                        width="350"
-                                        height="406"
-                                        loading="lazy"
-                                        alt={`Car image ${index + 1}`}
-                                        className="img-cover"
-                                    />
-                                ))
-                            ) : (
-                                <img
-                                    src="/images/default-car-image.webp"  // صورة افتراضية في حال عدم وجود صور
-                                    width="350"
-                                    height="406"
-                                    loading="lazy"
-                                    alt="Default car image"
-                                    className="img-cover"
-                                />
-                            )}
-                        </figure>
-                        <div className="card-content">
-                            <p className="card-subtitle">Auto Repair</p>
-                            <h3 className="h3 card-title">{item.name}</h3>
-                            <Link to={`/one-car/${item._id}`} className="card-btn">
-                                <span className="material-symbols-rounded">arrow_forward</span>
-                            </Link>
-                        </div>
-                    </div>
-                </li>
-            ))
-        )) : (
-            <p>Daten konnten nicht geladen werden.</p>
-        )
-    }
-</ul>
+                            {
+                                Array.isArray(list) ? (
+                                    loading ? <Loader /> : (
+                                        list.map((item) => (
+                                            <li className="scrollbar-item" key={item._id}>
+                                                <div className="work-card">
+                                                    <figure className="card-banner img-holder" style={{ "--width": "350", "--height": "406" }}>
+                                                        {/* عرض الصور من قاعدة البيانات */}
+                                                        {item.images && item.images.length > 0 ? (
+                                                            item.images.map((image, index) => (
+                                                                <img
+                                                                    key={index}
+                                                                    src={image.url}  // تأكد أن هذا الرابط صحيح
+                                                                    width="350"
+                                                                    height="406"
+                                                                    loading="lazy"
+                                                                    alt={`Car image ${index + 1}`}
+                                                                    className="img-cover"
+                                                                />
+                                                            ))
+                                                        ) : (
+                                                            <img
+                                                                src="/images/default-car-image.webp"  // صورة افتراضية في حال عدم وجود صور
+                                                                width="350"
+                                                                height="406"
+                                                                loading="lazy"
+                                                                alt="Default car image"
+                                                                className="img-cover"
+                                                            />
+                                                        )}
+                                                    </figure>
+                                                    <div className="card-content">
+                                                        <p className="card-subtitle">Auto Repair</p>
+                                                        <h3 className="h3 card-title">{item.name}</h3>
+                                                        {/* ⭐ متوسط التقييم */}
+                                                        <p className="rating">
+                                                            {getAverageRating(item._id)
+                                                                ? `⭐ ${getAverageRating(item._id)} / 5`
+                                                                : "Keine Bewertung"}
+                                                        </p>
+                                                        <Link to={`/one-car/${item._id}`} className="card-btn">
+                                                            <span className="material-symbols-rounded">arrow_forward</span>
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        ))
+                                    )) : (
+                                    <p>Daten konnten nicht geladen werden.</p>
+                                )
+                            }
+                        </ul>
 
                     </div>
                 </section>
