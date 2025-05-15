@@ -59,7 +59,7 @@ function Header({ setShowLogin }) {
 
         {userName ?
           <>
-            <span className="btn btn-primary">
+            <span >
               Willkommen, <strong>{userName}</strong>
             </span>
 
