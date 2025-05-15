@@ -5,7 +5,7 @@ import {  useNavigate } from "react-router-dom";
 function Header({ setShowLogin }) {
   const navbarRef = useRef(null);
   const [isNavActive, setIsNavActive] = useState(false);
-  const { userName,setUserName, setToken,token } = useContext(StoreContext);
+  const { userName,setUserName, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
   const toggleNavbar = () => {
     setIsNavActive((prev) => !prev);

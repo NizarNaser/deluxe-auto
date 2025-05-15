@@ -9,7 +9,7 @@ import Loader from "../../components/Loader/Loader";
 const OneCar = () => {
   const { id } = useParams();
   const url = import.meta.env.VITE_API_URL;
-  const { setLoading, loading } = useContext(StoreContext);
+  const { setLoading, loading ,userName} = useContext(StoreContext);
   const [currentImage, setCurrentImage] = useState('');
   const [activeThumb, setActiveThumb] = useState('');
   const [rating, setRating] = useState(0);
@@ -36,11 +36,11 @@ const OneCar = () => {
   };
 
   const handleCommentSubmit = async () => {
-    if (comment.trim() === '' || rating === 0) {
-      alert('يرجى كتابة تعليق واختيار تقييم.');
-      return;
-    }
-  
+    if (!userName) { alert('Bitte einloggen.');return;}
+    if (rating === 0 || !userName) { alert('Bitte wählen Sie eine Bewertung aus.');return;}
+    if(comment.trim() === ''){alert('Bitte schreiben Sie einen Kommentar'); return;}
+    
+    
     try {
       const token = localStorage.getItem("token"); // أو استخدم الـ context للوصول إلى التوكن
       const res = await axios.post(`${url}/api/reviews`, {
@@ -52,17 +52,20 @@ const OneCar = () => {
           Authorization: `Bearer ${token}`  // إرسال التوكن في الهيدر
         }
       });
-  
+
       setComments([res.data, ...comments]);
       setComment('');
       setRating(0);
     } catch (err) {
       console.error(err);
-      alert('Fehler beim Senden des Kommentars');
+      alert('Fehler beim Senden des Kommentars:'+
+             '1 - Anmelden'+
+            ' 2 - Schreiben Sie einen Kommentar'+
+             '3 - Put - Bewertung');
     }
   };
-  
-  
+
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -75,7 +78,7 @@ const OneCar = () => {
           setCurrentImage(carRes.data.images[0].url);
           setActiveThumb(carRes.data.images[0].url);
         }
-  
+
         const commentRes = await axios.get(`${url}/api/reviews/${id}`);
         setComments(commentRes.data);
       } catch (err) {
@@ -83,10 +86,10 @@ const OneCar = () => {
         setLoading(false);
       }
     };
-  
+
     fetchData();
   }, [id]);
-  
+
 
   return (
     <>
@@ -107,15 +110,15 @@ const OneCar = () => {
         <div className="thumbnails">
           {/* عرض الصور الإضافية في الـ thumbnails */}
           {loading ? <Loader /> : (
-          data.images.length > 0 && data.images.map((thumb, index) => (
-            <img
-              key={index}
-              src={thumb.url}
-              alt={`thumb-${index}`}
-              className={`thumb ${activeThumb === thumb.url ? 'active' : ''}`}
-              onClick={() => handleThumbClick(thumb.url)}
-            />
-          )))}
+            data.images.length > 0 && data.images.map((thumb, index) => (
+              <img
+                key={index}
+                src={thumb.url}
+                alt={`thumb-${index}`}
+                className={`thumb ${activeThumb === thumb.url ? 'active' : ''}`}
+                onClick={() => handleThumbClick(thumb.url)}
+              />
+            )))}
         </div>
 
         <div className="car-info">
@@ -124,9 +127,9 @@ const OneCar = () => {
         </div>
 
         <div className="car-description">
-        
-            <ReactMarkdown>{data.description}</ReactMarkdown>
-          
+
+          <ReactMarkdown>{data.description}</ReactMarkdown>
+
         </div>
 
         <div className="rating-section">
@@ -150,7 +153,7 @@ const OneCar = () => {
             <h3>Einen Kommentar hinzufügen</h3>
             <textarea
               rows={6}
-              
+
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Schreiben Sie hier Ihren Kommentar..."
@@ -158,20 +161,20 @@ const OneCar = () => {
             <button onClick={handleCommentSubmit}>schicken</button>
 
             <div id="comments-list">
-            {comments.length > 0 ? (
-  comments.map((c, i) => (
-    <div key={i} className="single-comment">
-      <p><strong>{c.user}:</strong> {c.comment}</p>
-      <div className="stars">
-        {[1, 2, 3, 4, 5].map((val) => (
-          <span key={val} className={`star ${c.rating >= val ? 'active' : ''}`}>&#9733;</span>
-        ))}
-      </div>
-    </div>
-  ))
-) : (
-  <p>Noch keine Kommentare.</p>
-)}
+              {comments.length > 0 ? (
+                comments.map((c, i) => (
+                  <div key={i} className="single-comment">
+                    <p><strong>{c.user}:</strong> {c.comment}</p>
+                    <div className="stars">
+                      {[1, 2, 3, 4, 5].map((val) => (
+                        <span key={val} className={`star ${c.rating >= val ? 'active' : ''}`}>&#9733;</span>
+                      ))}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>Noch keine Kommentare.</p>
+              )}
 
             </div>
           </div>

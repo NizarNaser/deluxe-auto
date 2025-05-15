@@ -45,7 +45,8 @@
   --fs-4: 1.8rem;
   --fs-5: 1.4rem;
   --fs-6: 1.2rem;
-  
+  --fs-7: 1rem;
+
   --fw-400: 400;
   --fw-600: 600;
   --fw-700: 700;
@@ -376,11 +377,12 @@ body {
 
 .navbar-link {
   font-family: var(--ff-chakra-petch);
-  font-size: var(--fs-5);
+  font-size: var(--fs-7);
   text-transform: uppercase;
   color: var(--white);
-  padding: 10px 20px;
+  padding: 5px 10px;
   transition: var(--transition);
+  text-align: center;
 }
 
 .navbar-link:is(:hover, :focus-visible) {
@@ -537,6 +539,10 @@ body {
   padding: 14px;
   border-radius: var(--radius-circle);
   transition: var(--transition);
+}
+.social-link img{
+width: 44px;
+border-radius: 5px;
 }
 
 .social-link:is(:hover, :focus-visible) {
